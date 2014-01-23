@@ -1,4 +1,3 @@
-
 //========== 1  ========== 
 
 // $killall mongod
@@ -13,7 +12,7 @@ testRollback()
 
 // $ps -A | grep mongod
 rs.slaveOk()
-db.foo.find()  <<< RESP
+db.foo.find() // <<< RESULT
 
 
 //========== 2  ========== 
@@ -32,7 +31,7 @@ db.getLastErrorObj(2)
 
 // $mongod --fork --logpath c.log --smallfiles --oplogSize 50 --port 27003 --dbpath data/z3 --replSet z
 
-db.foo.find() <<< RESP
+db.foo.find() // <<< RESULT
 
 
 //========== 3  ========== 
@@ -51,7 +50,7 @@ cfg = rs.conf();
 cfg.members[2].priority = 0;
 rs.reconfig(cfg);
 
-part4()  <<<< RESP
+part4() // <<< RESULT
 
 //========== 5  ========== 
 // We can create an index to make the query fast/faster: <<<< RESP
@@ -76,8 +75,8 @@ part4()  <<<< RESP
 // $mongorestore --dbpath config ../server/config_server/
 // $mongod --configsvr --dbpath config
 // $mongo localhost:27019/config
-db.chunks.find().sort({_id:1}).next().lastmodEpoch.getTimestamp().toUTCString().substr(20,6)
-//07:07 <<<< RESP
+db.chunks.find().sort({_id:1}).next().lastmodEpoch.getTimestamp().toUTCString().substr(20,6)  // <<< RESULT
+
 
 
 
@@ -104,13 +103,13 @@ sh.startBalancer()
 
 use snps
 db.elegans.ensureIndex({N2:1,mutant:1}) 
-db.elegans.aggregate([{$match:{N2:"T"}},{$group:{_id:"$N2",n:{$sum:1}}}]).result[0].n <<<< RESP
+db.elegans.aggregate([{$match:{N2:"T"}},{$group:{_id:"$N2",n:{$sum:1}}}]).result[0].n // <<< RESULT
 
 
 //========== 10  ========== 
 db.elegans.find({N2:"T",mutant:"A"}).limit(5).explain()
-// 2 shards are queried. <<<< RESP
-// 10 documents are scanned. <<<< RESP
+// 2 shards are queried. // <<< RESULT
+// 10 documents are scanned. // <<< RESULT
 
 
 
@@ -122,5 +121,5 @@ db.problem11.aggregate(
 			_id:{n2 : "$N2" , mutant : "$mutant"}, 
 			count : {$sum:1}
 		}
-}).result.length  <<<< RESP
+}).result.length // <<< RESULT
 
