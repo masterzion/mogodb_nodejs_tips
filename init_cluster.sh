@@ -1,13 +1,14 @@
 # run process for the cluster
 
 #install packages in ami image
-sudo echo "[mongodb-org-3.0]" > /etc/yum.repos.d/mongodb-org-3.0.repo
-sudo echo "name=MongoDB Repository" >> /etc/yum.repos.d/mongodb-org-3.0.repo
-sudo echo "baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/" >> /etc/yum.repos.d/mongodb-org-3.0.repo
-sudo echo "gpgcheck=0" >> /etc/yum.repos.d/mongodb-org-3.0.repo
-sudo echo "enabled=1" >> /etc/yum.repos.d/mongodb-org-3.0.repo
-sudo yum install -y mongodb-org-3.0.15 mongodb-org-server-3.0.15 mongodb-org-shell-3.0.15 mongodb-org-mongos-3.0.15 mongodb-org-tools-3.0.15
+sudo echo "[mongodb-enterprise]" > /etc/yum.repos.d/mongodb-enterprise.repo
+sudo echo "name=MongoDB Enterprise Repository" >> /etc/yum.repos.d/mongodb-enterprise.repo
+sudo echo "baseurl=https://repo.mongodb.com/yum/amazon/2013.03/mongodb-enterprise/3.6/$basearch/" >> /etc/yum.repos.d/mongodb-enterprise.repo
+sudo echo "gpgcheck=1" >> /etc/yum.repos.d/mongodb-enterprise.repo
+sudo echo "enabled=1" >> /etc/yum.repos.d/mongodb-enterprise.repo
+sudo echo "gpgkey=https://www.mongodb.org/static/pgp/server-3.6.asc" >> /etc/yum.repos.d/mongodb-enterprise.repo
 
+sudo yum install -y mongodb-enterprise-3.6.1 mongodb-enterprise-server-3.6.1 mongodb-enterprise-shell-3.6.1 mongodb-enterprise-mongos-3.6.1 mongodb-enterprise-tools-3.6.1
 
 # running on a single dev machine as a demo...
 sudo mkdir /mongodb
