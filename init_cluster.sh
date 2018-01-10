@@ -1,4 +1,14 @@
 # run process for the cluster
+
+#install packages in ami image
+sudo echo "[mongodb-org-3.0]" > /etc/yum.repos.d/mongodb-org-3.0.repo
+sudo echo "name=MongoDB Repository" >> /etc/yum.repos.d/mongodb-org-3.0.repo
+sudo echo "baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/" >> /etc/yum.repos.d/mongodb-org-3.0.repo
+sudo echo "gpgcheck=0" >> /etc/yum.repos.d/mongodb-org-3.0.repo
+sudo echo "enabled=1" >> /etc/yum.repos.d/mongodb-org-3.0.repo
+sudo yum install -y mongodb-org-3.0.15 mongodb-org-server-3.0.15 mongodb-org-shell-3.0.15 mongodb-org-mongos-3.0.15 mongodb-org-tools-3.0.15
+
+
 # running on a single dev machine as a demo...
 sudo mkdir /mongodb
 sudo mkdir /mongodb/a0
