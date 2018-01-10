@@ -29,6 +29,10 @@ sudo mkdir /mongodb/cfg0
 sudo mkdir /mongodb/cfg1
 sudo mkdir /mongodb/cfg2
 
+
+ln -s  /mongodb/ /data
+ln -s  /mongodb/ /data/db
+
 sudo chown -R mongod.mongod /mongodb/
 sudo chmod -R 770  /mongodb/
 
@@ -77,4 +81,7 @@ sudo -u mongod mongos --configdb "conf/localhost:26050,localhost:26051,localhost
 sudo -u mongod mongo  --port 26050  --eval 'rs.status()'
 
 sudo -u mongod ps aux | grep mongo
+
+
+echo "run: mongoimport  --db config --collection jairo --mode upsert --port 26061 --file people.json"
 
